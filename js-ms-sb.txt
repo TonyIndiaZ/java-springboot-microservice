@@ -1,0 +1,123 @@
+plugin chrome:
+===========
+JSONview -> add to chrome for actuator end points in proper json
+
+
+
+render -Hoisting:
+===============
+./mvnw spring-boot:run
+
+
+URL:
+====
+git: X
+-----
+https://trackit-repo.onrender.com
+
+docker:
+------
+https://trackit-server-v1.onrender.com
+
+
+===============================
+Intellj
+-------
+
+preference -> plugins -dark purple theme
+appernce : select : Dark Purple
+Font : cosmic sans MS
+size : 26
+
+File | Settings | Appearance & Behavior
+enable shortcut: Presntation assiatnce : check show actions names and shortcuts
+
+
+
+
+==============================================
+
+Docker command:
+
+using jib to create container : mvn compile jib:dockerBuild
+to run container : docker run -d --name sbsevice -p 9092:9092 tonystarkin09/sb:v1
+
+push docker hub repo:docker push tonystarkin09/sc:v1
+
+push image to docker hub : docker image push docker.io/tonystarkin09/configserver:s8
+
+========================================================================
+
+Create MYSQL running container instead of H2 database with Docker:
+-----------------------------------------------------------------
+
+docker run -p 3306:3306 --name scdb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=scdb -d mysql
+------
+Exp:
+ -e means : env variables
+3306 - default MySQL server running port
+--name dbname
+MYSQL_ROOT_PASSWORD=root, username and password
+
+-e MYSQL_DATABASE=scdb, till docker setup container, this will manage
+
+container name : MySQL
+-d detach mode
+
+
+
+
+==================================
+codeDecode -> project
+
+
+ms1
+profiles : default
+ - application.properties
+ - application-dev.properties
+ - application-local.properties: all local config , db, eureka
+
+
+-> active : dev
+->eureka server as cluster one
+eureka-client-service-url-defaultZone: http://eureka-0.eureka-service.default.svc.cluster.local:8761/eureka
+
+ms2
+ - application.properties
+ - application-dev.properties
+ - application-local.properties: all local config , db, eureka
+-> active : dev
+->eureka server as cluster one
+eureka-client-service-url-defaultZone: http://eureka-0.eureka-service.default.svc.cluster.local:8761/eureka
+
+push to docker -> image,container : push to docker hub
+
+
+
+
+googlejib for docker image creation:
+
+            <!-- ✅ Jib Plugin for Docker Build -->
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <to>
+                        <image>tonystarkin09/sc:v1</image>
+                    </to>
+                </configuration>
+            </plugin>
+
+
+
+
+eureka server:
+============
+
+spring cloud config
+eureka server
+actuator
+
+
+
